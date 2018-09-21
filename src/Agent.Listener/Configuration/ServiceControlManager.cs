@@ -35,7 +35,20 @@ namespace Microsoft.VisualStudio.Services.Agent.Listener.Configuration
             serviceName = string.Empty;
             serviceDisplayName = string.Empty;
 
-            string accountName = new Uri(settings.ServerUrl).Host.Split('.').FirstOrDefault();
+            Uri serverUrl = new Uri(url);	
+            string accountName;
+            
+            if (string.Equals(serverUrl.Host, "dev.azure.com"))
+            {
+                // Account name is specified outside the host (e.g. https://dev.azure.com/myaccount)
+                accountName = serverUrl.AbsolutePath.TrimStart(new[] { '/' }).Split('/').FirstOrDefault();
+            }
+            else
+            {
+                // Account name is specified within the host (e.g. https://myaccount.visualstudio.com, or http://onprem:8080/tfs)
+                accountName = serverUrl.Host.Split('.').FirstOrDefault();
+            }
+
             if (string.IsNullOrEmpty(accountName))
             {
                 throw new InvalidOperationException(StringUtil.Loc("CannotFindHostName", settings.ServerUrl));
