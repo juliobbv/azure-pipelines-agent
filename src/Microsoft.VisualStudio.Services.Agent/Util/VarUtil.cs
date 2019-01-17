@@ -57,6 +57,8 @@ namespace Microsoft.VisualStudio.Services.Agent.Util
                         return "X64";
                     case Constants.Architecture.Arm:
                         return "ARM";
+                    case Constants.Architecture.Rhel6X64:
+                        return "RHEL6X64";
                     default:
                         throw new NotSupportedException(); // Should never reach here.
                 }
