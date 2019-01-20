@@ -17,12 +17,3 @@ jobs:
     workingDirectory: src
     displayName: Package Release
     condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
-
-  # Upload agent package zip as build artifact
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Artifact (Linux ARM)
-    condition: and(succeeded(), ne(variables['build.reason'], 'PullRequest'))
-    inputs:
-      pathToPublish: _package
-      artifactName: agent
-      artifactType: container
