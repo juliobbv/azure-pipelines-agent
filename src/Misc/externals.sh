@@ -63,8 +63,10 @@ function acquireExternalTool() {
             #      -S Show error. With -s, make curl show errors when they occur
             #      -L Follow redirects (H)
             #      -o FILE    Write to FILE instead of stdout
-            curl -fkSL -o "$partial_target" "$download_source" 2>"${download_target}_download.log" || checkRC 'curl'
+            #curl -fkSL -o "$partial_target" "$download_source" 2>"${download_target}_download.log" || checkRC 'curl'
 
+            wget --no-check-certificate -o "$partial_target" "$download_source" 2> "${download_target}_download.log" || checkRC 'wget'
+            
             # Move the partial file to the download target.
             mv "$partial_target" "$download_target" || checkRC 'mv'
 
