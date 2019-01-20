@@ -127,7 +127,7 @@ function layout ()
     if [[ ("$CURRENT_PLATFORM" == "windows") ]]; then
         dotnet msbuild //t:layout //p:PackageRuntime=${RUNTIME_ID} //p:BUILDCONFIG=${BUILD_CONFIG} || failed build
     else
-        dotnet msbuild /t:layout;test /p:PackageRuntime=${RUNTIME_ID} /p:BUILDCONFIG=${BUILD_CONFIG} || failed build
+        dotnet msbuild '/t:layout;test' /p:PackageRuntime=${RUNTIME_ID} /p:BUILDCONFIG=${BUILD_CONFIG} || failed build
     fi
 
     mkdir -p ${LAYOUT_DIR}/bin/en-US
