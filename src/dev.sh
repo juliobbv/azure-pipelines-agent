@@ -124,6 +124,12 @@ function layout ()
 {
     heading "Create layout ..."
 
+    if [[ ("$CURRENT_PLATFORM" == "linux") || ("$CURRENT_PLATFORM" == "darwin") ]]; then
+        ulimit -n 1024
+    fi
+
+    export VSTS_AGENT_SRC_DIR=${SCRIPT_DIR}
+
     if [[ ("$CURRENT_PLATFORM" == "windows") ]]; then
         dotnet msbuild //t:layout //p:PackageRuntime=${RUNTIME_ID} //p:BUILDCONFIG=${BUILD_CONFIG} || failed build
     else
