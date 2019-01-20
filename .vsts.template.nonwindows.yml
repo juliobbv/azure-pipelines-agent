@@ -10,9 +10,9 @@ steps:
   displayName: Build & Layout Release
 
 # Run test
-- script: ./dev.sh test
-  workingDirectory: src
-  displayName: Test
+#- script: ./dev.sh test
+#  workingDirectory: src
+#  displayName: Test
 
 # Publish test results
 - task: PublishTestResults@2
