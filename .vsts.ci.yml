@@ -10,7 +10,7 @@ jobs:
   # Steps template for windows platform
   - template: .vsts.template.windows.yml
     parameters:
-      componentDetection: 'true'
+      componentDetection: 'false'
 
   # Package dotnet core windows dependency (VC++ Redistributable)
   - powershell: |
