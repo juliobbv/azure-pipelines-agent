@@ -14,7 +14,7 @@ steps:
   clean: true
 
 # Point NuGet package to Build.SourcesDirectory
-- script: set NUGET_PACKAGES=%BUILD_SOURCESDIRECTORY%\NugetPkg
+- script: ##vso[task.setvariable variable=NUGET_PACKAGES;]%BUILD_SOURCESDIRECTORY%\NugetPkg"
 
 # Restore NuGet cache
 - restoreCache: README.md # todo fix this with correct set of keys
