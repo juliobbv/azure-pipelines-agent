@@ -22,9 +22,11 @@ steps:
 #  cacheHitVar: HitVar
 
 # Restore _downloads folder
-- restoreCache: src/Misc/externals.sh
-  path: _downloads
-  cacheHitVar: ExternalsHitVar
+- task: RestoreCache@0
+  inputs: 
+    key: src/Misc/externals.sh
+    path: _downloads
+    cacheHitVar: ExternalsHitVar
 
 # Build agent layout
 - script: dev.cmd layout Release
@@ -41,8 +43,10 @@ steps:
 #  path: NugetPkg
 
 # Save _downloads folder
-- saveCache: src/Misc/externals.sh
-  path: _downloads
+- task: SaveCache@0
+  inputs:
+    key: src/Misc/externals.sh
+    path: _downloads
 
 # Publish test results
 - task: PublishTestResults@2
