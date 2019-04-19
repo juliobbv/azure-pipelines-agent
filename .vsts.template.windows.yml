@@ -13,6 +13,13 @@ steps:
 - checkout: self
   clean: true
 
+# Point NuGet package to Build.SourcesDirectory
+- script: set NUGET_PACKAGES=%BUILD_SOURCESDIRECTORY%\NugetPkg
+
+# Restore NuGet cache
+- restoreCache: README.md # todo fix this with correct set of keys
+  path: NugetPkg
+
 # Build agent layout
 - script: dev.cmd layout Release
   workingDirectory: src
@@ -22,6 +29,10 @@ steps:
 - script: dev.cmd test
   workingDirectory: src
   displayName: Test
+
+# Save NuGet cache
+- saveCache: README.md # todo fix this with correct set of keys
+  path: NugetPkg
 
 # Publish test results
 - task: PublishTestResults@2
