@@ -17,9 +17,14 @@ steps:
 - script: ##vso[task.setvariable variable=NUGET_PACKAGES;]%BUILD_SOURCESDIRECTORY%\NugetPkg"
 
 # Restore NuGet cache
-- restoreCache: README.md # todo fix this with correct set of keys
-  path: NugetPkg
-  cacheHitVar: HitVar
+#- restoreCache: README.md # todo fix this with correct set of keys
+#  path: NugetPkg
+#  cacheHitVar: HitVar
+
+# Restore _downloads folder
+- restoreCache: src/Misc/externals.sh
+  path: _downloads
+  cacheHitVar: ExternalsHitVar
 
 # Build agent layout
 - script: dev.cmd layout Release
@@ -32,8 +37,12 @@ steps:
   displayName: Test
 
 # Save NuGet cache
-- saveCache: README.md # todo fix this with correct set of keys
-  path: NugetPkg
+#- saveCache: README.md # todo fix this with correct set of keys
+#  path: NugetPkg
+
+# Save _downloads folder
+- saveCache: src/Misc/externals.sh
+  path: _downloads
 
 # Publish test results
 - task: PublishTestResults@2
